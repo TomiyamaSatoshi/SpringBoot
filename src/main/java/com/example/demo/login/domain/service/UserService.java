@@ -12,7 +12,7 @@ import com.example.demo.login.domain.repository.UserDao;
 public class UserService {
 
 	@Autowired
-	UserDao dao;
+	private UserDao dao;
 	
 	//insert用メソッド
 	public boolean insert(User user){
@@ -36,5 +36,11 @@ public class UserService {
 	public List<User> selectMany(){
 		//全件取得
 		return dao.selectMany();
+	}
+	
+	//１件取得用メソッド
+	public User selectOne(String userId){
+		//selectOne実行
+		return dao.selectOne(userId);
 	}
 }
