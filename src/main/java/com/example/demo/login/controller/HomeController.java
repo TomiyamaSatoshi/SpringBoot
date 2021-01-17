@@ -96,5 +96,28 @@ public class HomeController {
 		}
 		return"login/homeLayout";
 	}
-
+	
+	// ユーザー更新用処理
+	@PostMapping(value="/userDetail",params="update")
+	public String postUserDetailUpdate(@ModelAttribute SignupForm form, Model model) {
+		System.out.println("更新ボタンの処理");
+		//Userインスタンスの生成
+		User user = new User();
+		//フォームクラスをUserクラスに変換
+		user.setUserId(form.getUserId());
+		user.setPassword(form.getPassword());
+		user.setUserName(form.getUserName());
+		user.setBirthday(form.getBirthday());
+		user.setAge(form.getAge());
+		user.setMarriage(form.isMarriage());
+		//更新実行
+		boolean result = userService.updateOne(user);
+		if (result == true) {
+			model.addAttribute("result","更新成功");
+		} else {
+			model.addAttribute("result","更新失敗");
+		}
+		//ユーザー一覧画面を表示
+		return getUserList(model);
+	}
 }
