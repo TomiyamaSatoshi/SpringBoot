@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,12 +108,17 @@ public class HomeController {
 		user.setBirthday(form.getBirthday());
 		user.setAge(form.getAge());
 		user.setMarriage(form.isMarriage());
-		//更新実行
-		boolean result = userService.updateOne(user);
-		if (result == true) {
-			model.addAttribute("result","更新成功");
-		} else {
-			model.addAttribute("result","更新失敗");
+		
+		try {
+			//更新実行
+			boolean result = userService.updateOne(user);
+			if (result == true) {
+				model.addAttribute("result","更新成功");
+			} else {
+				model.addAttribute("result","更新失敗");
+			}
+		} catch (DataAccessException e) {
+			model.addAttribute("result","更新失敗（トランザクションテスト）");			
 		}
 		//ユーザー一覧画面を表示
 		return getUserList(model);
@@ -122,12 +128,17 @@ public class HomeController {
 	@PostMapping(value="/userDetail",params="delete")
 	public String postUserDetailDelete(@ModelAttribute SignupForm form, Model model) {
 		System.out.println("削除ボタンの処理");
-		//削除実行
-		boolean result = userService.deleteOne(form.getUserId());
-		if (result == true) {
-			model.addAttribute("result","削除成功");
-		} else {
-			model.addAttribute("result","削除失敗");
+		
+		try {
+			//削除実行
+			boolean result = userService.deleteOne(form.getUserId());
+			if (result == true) {
+				model.addAttribute("result","削除成功");
+			} else {
+				model.addAttribute("result","削除失敗");
+			}
+		}catch (DataAccessException e) {
+			model.addAttribute("result","更新失敗（トランザクションテスト）");
 		}
 		//ユーザー一覧画面を表示
 		return getUserList(model);
