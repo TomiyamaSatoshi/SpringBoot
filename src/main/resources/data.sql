@@ -20,7 +20,7 @@ INSERT INTO m_user(
 	,role)
 VALUES(
 	'yamada@xxx.co.jp'
-	,'password'
+	,'$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa'
 	,'山田太郎'
 	,'1990-01-01'
 	,28
@@ -39,7 +39,7 @@ INSERT INTO m_user(
 	,role)
 VALUES(
 	'tamura@xxx.co.jp'
-	,'password'
+	,'$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa'
 	,'田村達也'
 	,'1990-01-01'
 	,28
